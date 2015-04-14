@@ -1,0 +1,54 @@
+# Add Column in book_negotiates, negotiates  table
+rails generate migration AddNegoIdToNegotiates nego_id:integer
+
+rails generate migration AddNegoIdToBookNegotiates nego_id:integer
+
+# Add Table Rate
+rails g model Rate negotiate:references book_negotiate:references user:references rated_id:integer post_requirement:references book_post_requirement:references rated_no:integer service_type:string
+
+# Add skill Shaering 
+rails g model sub_category sub_category_type
+
+# Start Skill Shaering ===================================================================
+
+# Add skill Shaering 
+rails g model sub_category sub_category_type
+
+# Add Table SkillPostRequirement
+rails g model skill_post_requirement service:references city:references location:references sub_category:references user:references seeker_provider:boolean latitude:float longitude:float description:text home_service:boolean service_in_one_line:text charges:float mon:boolean tue:boolean wed:boolean thu:boolean fri:boolean sat:boolean sun:boolean 
+
+# Add column in negotiates
+rails generate migration AddSkillPostRequirmentIdToNegotiates skill_post_requirement_id:integer
+
+# Add column in Messages
+rails generate migration AddSkillPostRequirmentIdToMessages skill_post_requirement_id:integer
+
+# Add column in Orders 
+rails generate migration AddSkillPostRequirmentIdToOrders skill_post_requirement_id:integer
+
+# Add column in Activities 
+rails generate migration AddSkillPostRequirmentIdToActivities skill_post_requirement_id:integer
+
+# Add column in Rates 
+rails generate migration AddSkillPostRequirmentIdToRates skill_post_requirement_id:integer
+
+# Add column in killPostRequirment for paperclip
+rails generate migration AddSkillColumnsToSkillPostRequirements
+def self.up
+    add_attachment :skill_post_requirements, :skill
+end
+def self.down
+  remove_attachment :skill_post_requirements, :skill
+end
+
+# Social media login ===================================================================
+rails g migration AddProviderToUsers provider:string uid:string
+
+# Ad Model for home page
+rails g model ad box_1:integer box_2:integer box_3:integer box_4:integer box_5:integerbox_6:integer box_7:integer box_8:integer box_9:integer box_10:integer ip
+
+# Create Category Model
+rails g model Category category_name:string
+
+# Add Category In book_post_requirements
+rails generate migration AddCategoryToBookPostRequirements category_id:integer

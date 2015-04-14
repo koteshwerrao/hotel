@@ -1,0 +1,202 @@
+<style type="text/css">
+
+#cf 
+  {
+    position:;
+    height:140px;
+    width:180px;
+    margin:;
+  }
+#cf img 
+{
+  position:absolute;
+  left:;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+#cf img.top:hover {
+  opacity:0;
+}
+/* Slider css */
+.captionOrange, .captionBlack
+        {
+            color: #fff;
+            font-size: 20px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 4px;
+        }
+        .captionOrange
+        {
+            background: #EB5100;
+            background-color: rgba(235, 81, 0, 0.6);
+        }
+        .captionBlack
+        {
+          font-size:16px;
+            background: #000;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        a.captionOrange, A.captionOrange:active, A.captionOrange:visited
+        {
+          color: #ffffff;
+          text-decoration: none;
+        }
+        a.captionOrange:hover
+        {
+            color: #eb5100;
+            text-decoration: underline;
+            background-color: #eeeeee;
+            background-color: rgba(238, 238, 238, 0.7);
+        }
+        .bricon
+        {
+            background: url(../img/browser-icons.png);
+        }
+</style>
+
+
+<div class="content">
+  <h1 class="how_heading">Trending items </h1><br><br>
+  <!--<div calss="container_responsive">-->
+  <div class="resize_how_diag">
+    <div class="desktop_diag">
+      <table>
+        <tr>
+          <td>
+            <div id="cf">
+              <img class="bottom" src="/assets/micro-site/Pic 2.jpg" width="200" height="180">
+              <img class="top" src="/assets/micro-site/Pic1.jpg" width="200" height="180">
+            </div>
+            <p>
+        <a href="/digital_market" class="bix_1" target="_blank"> Guide to Digital Marketing</a>
+<script type="text/javascript">
+  $(".bix_1").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_1':"1"}),success: function (data) {}
+    });
+  });
+</script>
+            </p>
+            <p><strong>City:</strong> Ghaziabad</p> 
+          </td>
+          <td>
+            <div id="cf">
+              <img class="bottom" src="/assets/micro-site/cake3.JPG" width="180" height="140">
+              <img class="top" src="/assets/micro-site/cakemain.jpg" width="180" height="140">
+            </div>
+            <p>
+              <a href="/choc_cake" class="bix_2" target="_blank">Chocolate Cake in 20 min</a>
+<script type="text/javascript">
+  $(".bix_2").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_2':"1"}),success: function (data) {}
+    });
+  });
+</script>            
+            </p>
+            <p><strong>City:</strong> Ghaziabad</p> 
+          </td>
+          <td>
+            <div id="cf">
+              <img class="bottom" src="/assets/micro-site/cook2.JPG" width="180" height="140">
+              <img class="top" src="/assets/micro-site/Lemon-Rice.jpg" width="180" height="140">
+            </div>
+            <p>
+              <a href="/home_food" class="bix_3" target="_blank">Home Cooked Food</a>
+            </p>
+<script type="text/javascript">
+  $(".bix_3").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_3':"1"}),success: function (data) {}
+    });
+  });
+</script>
+            <p><strong>City:</strong> Ghaziabad</p> 
+          </td>
+          <td>
+            <div id="cf">
+              <img class="bottom"src="/assets/micro-site/hightech_ecommerce.jpg" width="180" height="140">
+              <img class="top" src="/assets/micro-site/online-marketing-ecommerce-industry.PNG" width="180" height="140">
+            </div>
+            <p>
+              <a href="/ecomm_shop" class="bix_4" target="_blank">Booming e-commerce Industry</a>
+<script type="text/javascript">
+  $(".bix_4").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_4':"1"}),success: function (data) {}
+    });
+  });
+</script>
+            </p>
+            <p><strong>City:</strong> Bangalore</p>
+          </td>
+          <td>
+            <div id="cf">
+              <img class="bottom" src="/assets/micro-site/marketing.jpg" width="180" height="140">
+              <img class="top" src="/assets/micro-site/marketingCloud.jpg" width="180" height="140">
+            </div>
+            <p>
+              <a href="/marketing_stratgy" class="bix_5" target="_blank"> Porter's 5 Forces: Marketing Gyan</a>
+<script type="text/javascript">
+  $(".bix_5").click(function () {
+    $.ajax({ type: 'POST',url: '/save_count',data: ({'ip_add':"<%= request.env['REMOTE_ADDR'] %>",'box_5':"1"}),success: function (data) {}
+    });
+  });
+</script>
+            </p>
+            <p><strong>City:</strong> Gurgaon</p> 
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <!-- -----------------------Mobile view------------ -->
+  <div class="mob_diag">
+    <div class="srch_res_mob">
+      <div class="res_data">
+        <div class="data_row">
+          <div class="data_col">
+            <img class="bottom" src="/assets/micro-site/cake3.JPG" width="180" height="140">
+            <p>
+              <a href="#" data-toggle="modal" data-target="#myModal"> Chocolate Cake in 20 min</a>
+            </p>
+            <p><strong>City:</strong> Ghaziabad</p> 
+          </div>
+          <div class="data_col">
+            <img class="top" src="/assets/micro-site/Pic1.jpg" width="180" height="140">
+            <p>
+              <a href="#" data-toggle="modal" data-target="#myModal"> Guide to Digital Marketing</a>
+            </p>
+            <p><strong>City:</strong> Ghaziabad</p> 
+          </div>
+        </div>
+        <div class="data_row">
+          <div class="data_col">
+            <img class="bottom" src="/assets/micro-site/online-marketing-ecommerce-industry.PNG"width="180" height="140">
+            <p>
+              <a a href="#" data-toggle="modal" data-target="#myModal"> Booming e-commerce Industry</a>
+            </p>
+            <p><strong>City:</strong> Bangalore</p> 
+          </div>
+          <div class="data_col">
+            <img class="bottom" src="/assets/micro-site/Lemon-Rice.jpg" width="180" height="140">
+            <p>
+              <a href="#" data-toggle="modal" data-target="#myModal"> Home Cooked food by Mrs. Nigam</a>
+            </p>
+            <p><strong>City:</strong> Ghaziabad</p> 
+          </div>
+        </div>
+        <div class="data_col">
+          <img class="bottom" src="/assets/micro-site/marketingCloud.jpg" width="180" height="140">
+          <p>
+            <a href="#" data-toggle="modal" data-target="#myModal"> Porter's 5 Forces: Marketing Gyan</a>
+          </p>
+          <p><strong>City:</strong> Gurgaon</p> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ---------------------------------mobile view end------------------------------ -->
+</div>
+<!-- ---------------------------------Models------------------------------ -->
+
+<%#= render :partial =>  "home/model" %>

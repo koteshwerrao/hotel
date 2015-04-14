@@ -1,0 +1,391 @@
+<!--<div style="position:absolute;width: 100%;">
+ <img src="assets/ad/left/banner120x600_2.gif" style="float:right;margin: 28px 6px 0 0px;">
+ <img src="assets/ad/right/ad_skyscraper_120x600.jpg" style="float:left;margin: 30px 0 0 5px;">
+</div>-->
+<script>
+$(document).ready(function() {
+    $("html, body").animate({ scrollTop: 450 }, 1000);
+});
+  function check_user(phone, email, user_id, location_id, book_post_requirement_id, seeker_provider){
+<% if current_user %>
+      var seeker_status = seeker_provider;
+      var current_user_id = "<%= current_user.id %>";
+    var email1 = email;
+    var phone1 = phone;
+      if (current_user_id != user_id){
+        $.ajax({ url : "/book_messages/create", type: "POST", data: { user_id: user_id, location_id :location_id, book_post_requirement_id : book_post_requirement_id}, dataType: "json"});
+        if(seeker_status == true){
+        var r = confirm("Your contact details will be shared with the book seeker .");
+        if (r == true){
+        alert("Please find the contact details of the book seeker:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
+        }
+        else {return;}
+        }
+        else{
+        var r = confirm("Your contact details will be shared with the book provider.");
+        if (r == true){
+        alert("Please find the contact details of the book provider:" + '\n'+ "Phone no:" + phone1 + '\n' + "Email id:" +email1);
+        }
+        else {return;}
+        }
+        $("#t_"+book_post_requirement_id).empty();
+        $("#t_"+book_post_requirement_id).html("Already Negotiated");
+      }
+      else{
+        alert("You can't able to negotiate this order");
+      }
+<% else %>
+      alert("You need to sign in or sign up before continuing");
+<% end %>
+  }
+// Ad Js
+$(function(){
+  var adBanners = [
+    "txp-leaderboard-728x90.jpg",
+    "basic-textpattern-728x90.jpg",
+    "wordpress-mythemesshop-728x90.jpg",
+    "mwp_banner_18_728x90.jpg",
+    "grooveshark-ad-728x90.jpg",
+    "treehouse-learning-ad-728x90.jpg",
+    "ddg-duck-duck-go-ad-728x90.jpg",
+    "photoshop-to-html-ad-728x90.jpg",
+    "getting-good-javascript-ad-728x90.jpg"
+  ];
+  var bannerLinks = [
+    "http://sharingdais.com/",
+    "http://sharingdais.com/",
+    "http://sharingdais.com/",
+    "http://sharingdais.com/",
+    "http://sharingdais.com/",
+    "http://sharingdais.com/",
+    "http://sharingdais.com/",
+    "http://sharingdais.com/",
+    "http://sharingdais.com/"
+  ];
+
+
+  var imgPrefix   = "assets/ad/top/";
+  var randNum     = Math.floor(Math.random() * (8 - 0 + 1)) + 0; /* http://stackoverflow.com/a/1527834/477958 */
+  var topAdBanner = $('#topad > a > img');
+
+  var newBannerImg  = imgPrefix + adBanners[randNum];
+  var newBannerLink = bannerLinks[randNum];
+
+  // update new img src and link HREF value
+  $(topAdBanner).attr('src',newBannerImg);
+  $('#topad > a').attr('href',newBannerLink);
+});
+</script>
+<style type="text/css">
+/* Ad CSS */
+#w {
+  display: block;
+  width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  /*padding: 4px 15px;
+  padding-bottom: 22px; */
+  -webkit-box-shadow: 1px 2px 2px rgba(0,0,0,0.4);
+  -moz-box-shadow: 1px 2px 2px rgba(0,0,0,0.4);
+  box-shadow: 1px 2px 2px rgba(0,0,0,0.4);
+}
+</style>
+<div class="content">
+
+<div class="resize" style="width:75%">
+
+    <!-- Top Ad-->
+    <!--<div id="w">
+      <div id="topad">
+        <a href=""><img src="" alt="advertisement" width="1000" height="90"></a>
+      </div>--><!-- @end #topad -->
+    <!--</div>--><!-- @end #w -->
+    <!-- End Top Ad-->
+
+    <div class="display ">
+      <div class="table-responsive src_res_desktop">
+        <table class="table table-hover">
+          <thead class="heading">
+            <tr>
+              <th style="width:5%">#</th>
+              <th style="width:10%"><center>Book Photo</center></th>
+              <th style="width:15%">Book Name</th>
+              <th style="width:10%">Author Name</th>
+              <th style="width:10%">Locality</th>
+              <th style="width:10%">Rent</th>
+              <th style="width:20%">Description</th>
+              <th style="width:10%">Category</th>
+              <th style="width:10%">Reviews</th>
+              <th style="width:10%">Contact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @count = 1 %>
+            <% @search_results.each do |s| %>
+              <tr>
+<%
+  @rate_1=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,1,s.id).count()
+  @rate_2=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,2,s.id).count()
+  @rate_3=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,3,s.id).count()
+  @rate_4=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,4,s.id).count()
+  @rate_5=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,5,s.id).count()
+
+  sum = @rate_1 +( @rate_2 * 2 ) + (@rate_3 * 3) + (@rate_4 * 4) + ( @rate_5 * 5)
+  total_no = @rate_1 + @rate_2 + @rate_3 + @rate_4 + @rate_5
+  if sum == 0
+    @src1 = "/assets/reviews/1str.png"
+    @src2 = "/assets/reviews/1str.png"
+    @src3 = "/assets/reviews/1str.png"
+    @src4 = "/assets/reviews/1str.png"
+    @src5 = "/assets/reviews/1str.png"
+  else
+    avrg = ( sum.to_f / total_no.to_f ).round(1)
+    if avrg >= 1
+      @src1 = "/assets/reviews/2str.png"
+    else
+      @src1 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 1.5
+      @src2 = "/assets/reviews/2str.png"
+    else
+      @src2 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 2.5
+      @src3 = "/assets/reviews/2str.png"
+    else
+      @src3 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 3.5
+      @src4 = "/assets/reviews/2str.png"
+    else
+      @src4 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 4.5
+      @src5 = "/assets/reviews/2str.png"
+    else
+      @src5 = "/assets/reviews/1str.png"
+    end
+  end
+%>
+                <td><%= @count %></td>
+                <td>
+                  <% if !s.image.path.nil? %>
+                    <%= image_tag s.image.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
+                  <%else%>
+                    <img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
+                  <%end%>
+                  <br />
+                  <% if s.seeker_provider == false %>
+                    <span style="left: 18%; position: relative;">
+                      <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
+                      <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
+                      <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
+                      <img style="cursor:pointer;width:13px" src="<%= @src4 %>">
+                      <img style="cursor:pointer;width:13px" src="<%= @src5 %>">
+                    </span>
+                  <%end%>
+
+                </td>
+                <td><%= s.name %></td>
+                <td><%= s.author %></td>
+                <td><%= s.location.location_name %></td>
+                <td><%= s.rent%></td>
+                <td><%= s.description%></td>
+                <td><%= s.category.category_name if s.category_id.present? %></td>
+                <td><button type="button" class="btn-link" data-toggle="modal" data-target="#Modals_show_book_reviews_<%= s.id %>_<%= s.user.id %>">Show Reviews</button></td>
+
+                <div class="modal fade" id="Modals_show_book_reviews_<%= s.id %>_<%= s.user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Show Reviews</h4>
+      </div>
+      <div class="modal-body">
+<!--Model Content-->
+      <% if s.reviews.size > 0 %>
+        <% s.reviews.each do |review| %>
+          <%= review.content %><br />
+          Written by:
+          <%= review.user.name if review.user_id %><br />
+        <% end %>
+      <% else %>
+        No Reviews Yet
+      <% end %>
+<!--End Model Content-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Model-->
+
+                <% @user_email = s.user.email%>
+                <% @user_phone = s.user.phone_no%>
+                <% if !current_user %>
+
+                    <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% elsif negotiate_book(current_user.id, s.id).nil?%>
+          <td id="t_<%= s.id %>">
+            <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% else %>
+                  <td>Already Negotiated</td>
+                <% end %>
+              </tr>
+              <% @count = @count+1 %>
+            <% end %>
+          </tbody>
+        </table>
+        <div id="">
+            <%= will_paginate @search_results, renderer: BootstrapPagination::Rails, params: {search: params[:search]} %>
+        </div>
+      </div>
+      <div class="srch_res_mob">
+      <% @search_results.each do |s| %>
+<%
+  @rate_1=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,1,s.id).count()
+  @rate_2=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,2,s.id).count()
+  @rate_3=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,3,s.id).count()
+  @rate_4=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,4,s.id).count()
+  @rate_5=Rate.where("rated_id=? AND rated_no=? AND book_post_requirement_id=?",s.user.id,5,s.id).count()
+
+  sum = @rate_1 +( @rate_2 * 2 ) + (@rate_3 * 3) + (@rate_4 * 4) + ( @rate_5 * 5)
+  total_no = @rate_1 + @rate_2 + @rate_3 + @rate_4 + @rate_5
+  if sum == 0
+    @src1 = "/assets/reviews/1str.png"
+    @src2 = "/assets/reviews/1str.png"
+    @src3 = "/assets/reviews/1str.png"
+    @src4 = "/assets/reviews/1str.png"
+    @src5 = "/assets/reviews/1str.png"
+  else
+    avrg = ( sum.to_f / total_no.to_f ).round(1)
+    if avrg >= 1
+      @src1 = "/assets/reviews/2str.png"
+    else
+      @src1 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 1.6
+      @src2 = "/assets/reviews/2str.png"
+    else
+      @src2 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 2.6
+      @src3 = "/assets/reviews/2str.png"
+    else
+      @src3 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 3.6
+      @src4 = "/assets/reviews/2str.png"
+    else
+      @src4 = "/assets/reviews/1str.png"
+    end
+    if avrg >= 4.6
+      @src5 = "/assets/reviews/2str.png"
+    else
+      @src5 = "/assets/reviews/1str.png"
+    end
+  end
+%>
+                              <div class="res_data">
+                                  <div class="data_row">
+                                      <div class="data_title">
+                                          Book Photo
+                                        </div>
+                                        <div class="data_col">
+                                        <% if !s.image.path.nil? %>
+                                          <%= image_tag s.image.url(:small), :style=>"width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;" %>
+                                          <%else%>
+                                          <img src="/assets/no_image_available.png" style="width:125px;height:125px;background-position: 50% 50%; background-repeat: no-repeat; border-radius: 50%;">
+                                          <%end%>
+                                          <br />
+                                          <% if s.seeker_provider == false %>
+                                          <span style="left: 15%; position: relative;">
+                  <img style="cursor:pointer;width:13px" src="<%= @src1 %>">
+                  <img style="cursor:pointer;width:13px" src="<%= @src2 %>">
+                  <img style="cursor:pointer;width:13px" src="<%= @src3 %>">
+                  <img style="cursor:pointer;width:13px" src="<%= @src4 %>">
+                  <img style="cursor:pointer;width:13px" src="<%= @src5 %>">
+                </span>
+                  <%end%>
+                                        </div>
+                                    </div>
+                                  <div class="data_row">
+                                      <div class="data_title">
+                                          Book Name
+                                        </div>
+                                        <div class="data_col">
+                                          <%= s.name %>
+                                        </div>
+                                    </div>
+
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Author Name
+                                        </div>
+                                        <div class="data_col">
+                                          <%= s.author %>
+                                        </div>
+                                    </div>
+
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Locality
+                                        </div>
+                                        <div class="data_col">
+                                          <%= s.location.location_name %>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Rent
+                                        </div>
+                                        <div class="data_col">
+                                          <%= s.rent%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Description
+                                        </div>
+                                        <div class="data_col">
+                                          <%= s.description%>
+                                        </div>
+                                    </div>
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Category
+                                        </div>
+                                        <div class="data_col">
+                                          <%= s.category.category_name if s.category_id.present?  %>
+                                        </div>
+                                    </div>
+
+                                    <div class="data_row">
+                                      <div class="data_title">
+                                          Contact
+                                        </div>
+                                        <div class="data_col" id="t_<%= s.id %>">
+                                        <% if !current_user %>
+                    <td><%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}','#{@user_email}','#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% elsif negotiate_book(current_user.id, s.id).nil?%>
+          <td id="t_<%= s.id %>">
+            <%= link_to("Interested","javascript:void(0)", {:onclick => "check_user('#{@user_phone}', '#{@user_email}', #{s.user_id}, #{s.location_id}, #{s.id}, #{s.seeker_provider});" }) %></td>
+                <% else %>
+                  <td>Already Negotiated</td>
+                <% end %>
+                                        </div>
+                                    </div>
+                                </div>
+
+      <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+.btn-link
+{
+  background:none!important;
+  border:none;
+  padding:0!important;
+}
+</style>
